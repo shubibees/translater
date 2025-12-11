@@ -19,8 +19,51 @@
   }
 }
 
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  --min-width: 1240px;
+  color: aliceblue;
+  width: min(var(--min-width), 100%);
+  margin: 0 auto;
+  min-height: 50vh;
+  border: 2px solid black;
+}
+
+.container-bar {
+  --min-width: 1240px;
+  color: aliceblue;
+  width: min(var(--min-width), 100%);
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+button {
+  padding: 2px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: blue;
+  border-radius: 100vh;
+  &:focus {
+    background: lightseagreen;
+    color: blue;
+  }
+}
+
+.text-area-container {
+  gap: 30px;
+  border: 2px solid blue;
+  textarea {
+    padding: 20px;
+  }
 }
