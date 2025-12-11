@@ -3,12 +3,12 @@ import TextEditor from "./components/TextEditor";
 import { useEffect, useState, useRef, useCallback } from "react";
 
 export default function Home() {
-  const [content, setContent] = useState({ textContaint: "", htmlContent: "" });
+  const [content, setContent] = useState({ textContent: "", htmlContent: "" });
   const [modelStatus, setModelStatus] = useState("idle");
   const worker = useRef<Worker | null>(null);
 
   function textUpdate(text: string) {
-    setContent((data) => ({ ...data, textContaint: text }));
+    setContent((data) => ({ ...data, textContent: text }));
   }
 
   function htmlUpdate(text: string) {
@@ -45,7 +45,7 @@ export default function Home() {
     return () => {
       worker.current?.removeEventListener("message", onMessageReceived);
     };
-  });
+  }, []);
 
   const classify = useCallback((text: string) => {
     worker.current?.postMessage({ text });
@@ -61,14 +61,14 @@ export default function Home() {
 
         <button
           className="button"
-          onClick={() => classify(content.htmlContent)}
+          onClick={() => classify(content.textContent)}
         >
           produce html
         </button>
       </div>
 
       <div className="container grid grid-cols-2 w-full gap-2.5">
-        <TextEditor value={content.textContaint} isHandle={textUpdate} />
+        <TextEditor value={content.textContent} isHandle={textUpdate} />
         <TextEditor value={content.htmlContent} isHandle={htmlUpdate} />
       </div>
     </>
